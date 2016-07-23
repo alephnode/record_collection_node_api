@@ -23,20 +23,20 @@
 //        }
 //      }
 // });
-$.ajax({
- type : "GET",
- //note that jsonp doesn't work; adds query string to url, static file can't handle that
- dataType : "json",
- url : "/api/records",
- success: function(data){
-   var json = data;
-   $.each(json, function(index, item){
-     index += 1;
-     $('#app').append(item.artist + ' - ' + item.title + '<br /><br />');
-   });
-
- }
-});
+// $.ajax({
+//  type : "GET",
+//  //note that jsonp doesn't work; adds query string to url, static file can't handle that
+//  dataType : "json",
+//  url : "/api/records",
+//  success: function(data){
+//    var json = data;
+//    $.each(json, function(index, item){
+//      index += 1;
+//      $('#app').append(item.artist + ' - ' + item.title + '<br /><br />');
+//    });
+//
+//  }
+// });
 //Example of code that pulls from external API
 // $.ajax({
 //  type : "GET",
@@ -48,6 +48,21 @@ $.ajax({
 //      $('#app').append(json[0].statement+'<br /><br />');
 //  }
 // });
+
+//NY Times example
+var url = "http://api.nytimes.com/svc/politics/v3/us/legislative/congress/members/house/nv/1/current.json";
+url += '?' + $.param({
+  'api-key': "a191f4cd23e9401f9ab75a7f3c214fd7"
+});
+$.ajax({
+  url: url,
+  method: 'GET',
+}).done(function(result) {
+  $('#app').append(result.results[0].name+'<br /><br />');
+}).fail(function(err) {
+  throw err;
+});
+
    })(jQuery);
   //END CODE THAT PULLS JSON FROM DATA FROM API AND DISPLAYS
   </script>
