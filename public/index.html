@@ -9,19 +9,46 @@
   </div>
   <script>
   //I. FREAKING. DID. IT.
-  (function($){
-    $.ajax({
-     type : "GET",
-     dataType : "text",
-     url : "http://localhost:8888/api/records",
-     success: function(data){
-       var json = $.parseJSON(data);
-       for(var i = 0; i < json.length; i++) {
-         $('#app').append(json[i]['artist'] + ' - ' + json[i]['title'] + '<br /><br />');
-       }
-     }
+   (function($){
+
+//old example with for loop ($.each() is more common)
+//     $.ajax({
+//      type : "GET",
+//      dataType : "text",
+//      url : "/api/records",
+//      success: function(data){
+//        var json = $.parseJSON(data);
+//        for(var i = 0; i < json.length; i++) {
+//          $('#app').append(json[i].artist + ' - ' + json[i].title + '<br /><br />');
+//        }
+//      }
+// });
+$.ajax({
+ type : "GET",
+ //note that jsonp doesn't work; adds query string to url, static file can't handle that
+ dataType : "json",
+ url : "/api/records",
+ success: function(data){
+   var json = data;
+   $.each(json, function(index, item){
+     index += 1;
+     $('#app').append(item.artist + ' - ' + item.title + '<br /><br />');
+   });
+
+ }
 });
-  })(jQuery);
+//Example of code that pulls from external API
+// $.ajax({
+//  type : "GET",
+//  crossDomain: true,
+// dataType: 'jsonp',
+//  url : "http://www.politifact.com/api/statements/truth-o-meter/people/barack-obama/json/?n=1",
+//  success: function(data){
+//    var json = data;
+//      $('#app').append(json[0].statement+'<br /><br />');
+//  }
+// });
+   })(jQuery);
   //END CODE THAT PULLS JSON FROM DATA FROM API AND DISPLAYS
   </script>
 </body>
