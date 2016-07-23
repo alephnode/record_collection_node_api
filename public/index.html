@@ -5,7 +5,7 @@
 </head>
 <body>
   <div id="app">
-    <h1>SUP</h1>
+    <h1>Record Database</h1>
   </div>
   <script>
   //I. FREAKING. DID. IT.
@@ -17,7 +17,7 @@
      success: function(data){
        var json = $.parseJSON(data);
        for(var i = 0; i < json.length; i++) {
-         $('#app').append(json[i]['title'] + '<br /><br />');
+         $('#app').append(json[i]['artist'] + ' - ' + json[i]['title'] + '<br /><br />');
        }
      }
 });
