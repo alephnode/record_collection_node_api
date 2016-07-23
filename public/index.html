@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>SUP</h1>
+  </div>
+  <script>
+  //I. FREAKING. DID. IT.
+  (function($){
+    $.ajax({
+     type : "GET",
+     dataType : "text",
+     url : "http://localhost:8888/api/records",
+     success: function(data){
+       var json = $.parseJSON(data);
+       for(var i = 0; i < json.length; i++) {
+         $('#app').append(json[i]['title'] + '<br /><br />');
+       }
+     }
+});
+  })(jQuery);
+  //END CODE THAT PULLS JSON FROM DATA FROM API AND DISPLAYS
+  </script>
+</body>
+</html>

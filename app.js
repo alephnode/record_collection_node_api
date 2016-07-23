@@ -1,6 +1,7 @@
 var express = require('express'),
     mongoose = require('mongoose'),
-		bodyParser = require('body-parser');
+		bodyParser = require('body-parser'),
+    path = require('path');
 
 //Connect to MongoDB Collection
 var db = mongoose.connect('mongodb://localhost/recordApp');
@@ -20,7 +21,8 @@ app.use(bodyParser.json());
 recordRouter = require('./Routes/recordRoutes.js')(Record);
 
 app.use('/api/records/', recordRouter);
-
+//serve static files!
+app.use(express.static('public'));
 
 app.get('/', function(req, res){
 	res.send('Welcome to my API!');
